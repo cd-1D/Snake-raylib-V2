@@ -8,12 +8,12 @@ private:
     Vector2 sizeSnake = {20, 20};
     Vector2 direction = {1, 0};
     std::vector<Vector2> body = {positionSnake};
-    std::vector<Vector2> bodyOld;
     int step = 20;
     int element = 0;
-    float coolDown = 0.6f;
+    float coolDown = 0.4f;
     float timer = 0.0f;
 public:
-    void update();
+    void update(int score);
     void draw();
+    Rectangle getRec();
 };

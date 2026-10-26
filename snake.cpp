@@ -3,7 +3,7 @@
 #include "config.hpp"
 #include <iostream>
 #include <vector>
-void Snake::update()
+void Snake::update(int score)
 {
     float DT = GetFrameTime();
     timer += DT;
@@ -17,27 +17,26 @@ void Snake::update()
         direction = {0, 1};
     if (coolDown < timer)
     {
-        bodyOld.push_back(positionSnake);
+        body.push_back(positionSnake);
         positionSnake.x += step * direction.x;
         positionSnake.y += step * direction.y;
         element++;
         timer = 0;
+        if (element >= 3 + score)
+        {
+            body.erase(body.begin());
+            element--;
+        }
     }
 }
 void Snake::draw()
 {
-    DrawRectangleV(positionSnake, sizeSnake, DARKGREEN);
-    for (Vector2 x : bodyOld)
+    for (Vector2 x : body)
     {
-        if (element <= 3)
-        {
-            DrawRectangleV(x, sizeSnake, DARKGREEN);
-            std::cout << element << std::endl;
-        }
-        else
-        {
-           bodyOld.erase(bodyOld.begin());
-           element--;
-        }
+        DrawRectangleV(x, sizeSnake, DARKGREEN);
     }
+}
+Rectangle Snake::getRec(){
+    Rectangle recSnake = {positionSnake.x , positionSnake.y, sizeSnake.x, sizeSnake.y};
+    return recSnake;
 }
