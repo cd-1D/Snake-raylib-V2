@@ -36,8 +36,8 @@ void Snake::draw()
         }
         else
         {
-            bodyOld.erase(bodyOld.begin());
-            element--;
+           bodyOld.erase(bodyOld.begin());
+           element--;
         }
     }
 }

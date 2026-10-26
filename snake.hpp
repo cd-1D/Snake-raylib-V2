@@ -4,7 +4,6 @@
 class Snake
 {
 private:
-
     Vector2 positionSnake = {300, 300};
     Vector2 sizeSnake = {20, 20};
     Vector2 direction = {1, 0};
