@@ -1,6 +1,8 @@
 #include "snake.hpp"
 #include "raylib.h"
+#include "config.hpp"
 #include <iostream>
+#include <vector>
 void Snake::update()
 {
     float DT = GetFrameTime();
@@ -15,13 +17,27 @@ void Snake::update()
         direction = {0, 1};
     if (coolDown < timer)
     {
-        positionSnake.x += speed * direction.x;
-        positionSnake.y += speed * direction.y;
+        bodyOld.push_back(positionSnake);
+        positionSnake.x += step * direction.x;
+        positionSnake.y += step * direction.y;
+        element++;
         timer = 0;
     }
-    std::cout << timer << std::endl;
 }
 void Snake::draw()
 {
-    DrawRectangleV(positionSnake, sizeSnake, GREEN);
+    DrawRectangleV(positionSnake, sizeSnake, DARKGREEN);
+    for (Vector2 x : bodyOld)
+    {
+        if (element <= 3)
+        {
+            DrawRectangleV(x, sizeSnake, DARKGREEN);
+            std::cout << element << std::endl;
+        }
+        else
+        {
+            bodyOld.erase(bodyOld.begin());
+            element--;
+        }
+    }
 }
