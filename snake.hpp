@@ -10,10 +10,13 @@ private:
     std::vector<Vector2> body = {positionSnake};
     int step = 20;
     int element = 0;
-    float coolDown = 0.4f;
+    float coolDown = 0.2f;
     float timer = 0.0f;
+    bool snakeCollision = false;
 public:
     void update(int score);
     void draw();
+    bool checkCollision();
     Rectangle getRec();
+    Vector2 getPosHead();
 };
