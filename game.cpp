@@ -3,7 +3,7 @@
 void Game::update()
 {
 
-    if (IsKeyPressed(KEY_SPACE) && state != pause)
+    if (IsKeyPressed(KEY_SPACE) && state != pause && state != game_over)
     {
         state = pause;
     }
@@ -24,7 +24,6 @@ void Game::update()
         // проверяем вышла ли змейка за границы экрана
         if (snake.getPosHead().x > 600 || snake.getPosHead().y > 600 || snake.getPosHead().x < 0 || snake.getPosHead().y < 0)
         {
-            std::cout << "game_over!" << std::endl;
             state = game_over;
         }
         if (snake.checkCollision())
@@ -50,6 +49,6 @@ void Game::draw()
     if (state == pause)
     {
         DrawText(TextFormat("score: %i", score), 20, 20, 25, WHITE);
-        DrawText("Press escape to continue...", 160, 230, 25, WHITE);
+        DrawText("Press space to continue...", 160, 230, 25, WHITE);
     }
 }
